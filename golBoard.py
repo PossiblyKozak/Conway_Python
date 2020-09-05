@@ -17,7 +17,7 @@ class golBoard():
         self.all_items = set()
         
     def draw(self, DISPLAYSURF, settings):
-        before = time.time()
+        #before = time.time()
         DISPLAYSURF.fill(golColours.WHITE if settings.isPaused else golColours.BLACK)
         w, h = mouseToPZ(pygame.display.get_surface().get_size(), settings)
         tt = 0
@@ -25,10 +25,10 @@ class golBoard():
             if onBoard(i, w, h, settings):
                 tt += 1
                 pygame.draw.rect(DISPLAYSURF, golColours.BLACK if settings.isPaused else golColours.WHITE, pzToRect(i, settings))
-        print("DRAW: %f seconds (%d/%d items)" % (time.time() - before, tt, len(self.all_items)))
+        #print("DRAW: %f seconds (%d/%d items)" % (time.time() - before, tt, len(self.all_items)))
 
     def update(self):
-        before = time.time()
+        #before = time.time()
         stat = Counter()
         for i in self.all_items:
             for x in range(i[0]-1, i[0]+2):
@@ -42,17 +42,19 @@ class golBoard():
             elif stat[i] in self.BORN:
                 nm.add(i)
         self.all_items = nm
-        print("UPDATE: %f seconds (size: %d)" % (time.time() - before, sys.getsizeof(self.all_items)))
+        #print("UPDATE: %f seconds (size: %d)" % (time.time() - before, sys.getsizeof(self.all_items)))
             
-    def addItem(self, pos, settings, surface, toAdd = True):
+    def addItem(self, pos, settings, surface, shape = [(0, 0)], toAdd = True):
         pz = mouseToPZ(pos, settings)
-        pygame.draw.rect(surface, golColours.BLACK if settings.isPaused else golColours.WHITE, pzToRect(pz, settings))
-        if toAdd: 
-            self.all_items.add(pz)
+        for coordinate in shape:
+            pygame.draw.rect(surface, golColours.BLACK if settings.isPaused else golColours.WHITE, pzToRect((pz[0] + coordinate[0], pz[1] + coordinate[1]), settings))
+            if toAdd: 
+                self.all_items.add((pz[0] + coordinate[0], pz[1] + coordinate[1]))
 
-    def drawTemp(self, pos, settings, surface):
+    def drawTemp(self, pos, settings, surface, shape = [(0, 0)]):
         pz = mouseToPZ(pos, settings)
-        pygame.draw.rect(surface, golColours.RED, pzToRect(pz, settings))
+        for coordinate in shape:
+            pygame.draw.rect(surface, golColours.RED, pzToRect((pz[0] + coordinate[0], pz[1] + coordinate[1]), settings))
 
     def removeItem(self, pos, settings, surface):
         pz = mouseToPZ(pos, settings)

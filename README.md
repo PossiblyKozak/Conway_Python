@@ -14,6 +14,7 @@ Conway's game of life using pygame
 - C to clear board
 - Left click to add cells
 - Right click to remove cells
+- Mouse Wheel to change stamping for prebuilt ships stores in the "/shapes" directory
 
 ## Information about the Game
 
@@ -26,7 +27,12 @@ For some examples of patterns to use (other than randomly dragging your cursor a
 - Better Navigation (zoom and pan)
 - More optimized processing of states
 - In game HUD for information about the board/settings
-- Stamping capabilities for premade patterns
+- ~~Stamping capabilities for premade patterns~~ **COMPLETE (stamps are stored in the shapes directory)**
+- Comb the 
+- Allow stamps to be rotated
+- Create stamps from a selected range of the screen
+- Store _X_ evolutions backwards and allow for the user to go back through those evolutions.
+- 
 - in game changes to the BORN/SURVIVE values to change possible states
 - Multi-state for more than just binary
 - Saving/Loading states
@@ -40,3 +46,7 @@ For some examples of patterns to use (other than randomly dragging your cursor a
 Feel free to fork or use this repository as you wish, I have no ownership rights over the game itself. Go nuts, just send over a pull request. 
 
 **Currently only tested on Windows 10 with Python 3.8.5 and pygame 1.9.6**
+
+## Attribution
+
+Premade shapes are taken from the [Life Lexicon](https://www.conwaylife.com/ref/lexicon/lex.htm) and it was incredibly helpful in deciphering the terms and phrases commonly used when speaking about Conway's Game of Life. 
